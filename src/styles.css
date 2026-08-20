@@ -1,8 +1,8 @@
 :root {
-  --radius: 0.5rem; /* Menos arredondado para um visual mais elegante */
+  --radius: 0.5rem;
 
-  --background: oklch(1 0 0); /* Branco puro */
-  --foreground: oklch(0.12 0.02 255); /* Azul muito escuro/quase preto */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.12 0.02 255);
 
   --card: oklch(0.98 0.005 255);
   --card-foreground: oklch(0.12 0.02 255);
@@ -10,16 +10,16 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.12 0.02 255);
 
-  --primary: oklch(0.2 0.04 255); /* Azul marinho profundo */
+  --primary: oklch(0.2 0.04 255);
   --primary-foreground: oklch(0.98 0 0);
 
-  --secondary: oklch(0.95 0.01 255); /* Cinza azulado muito claro */
+  --secondary: oklch(0.95 0.01 255);
   --secondary-foreground: oklch(0.2 0.04 255);
 
   --muted: oklch(0.96 0.005 255);
   --muted-foreground: oklch(0.45 0.02 255);
 
-  --accent: oklch(0.2 0.04 255); /* Mesma cor primária para acento */
+  --accent: oklch(0.2 0.04 255);
   --accent-foreground: oklch(0.98 0 0);
 
   --destructive: oklch(0.5 0.15 25);
@@ -38,7 +38,7 @@
   --sidebar-border: oklch(0.85 0.01 255);
   --sidebar-ring: oklch(0.2 0.04 255);
 
-  /* Dourado sofisticado para detalhes */
+  /* Dourado sofisticado Clínica Vasques */
   --gold: oklch(0.65 0.1 80);
   --gold-light: oklch(0.85 0.05 90);
   --gold-dark: oklch(0.55 0.1 70);
@@ -87,6 +87,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  
+  --color-gold: var(--gold);
 }
 
 @layer base {
@@ -105,5 +107,24 @@
     font-weight: 400;
     letter-spacing: -0.02em;
     color: var(--color-primary);
+  }
+}
+
+@layer components {
+  .btn-gold-glass {
+    background-image: var(--gradient-gold);
+    color: white;
+    box-shadow: var(--shadow-gold);
+    border: 1px solid var(--gold);
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  .btn-gold-glass:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -4px color-mix(in oklab, var(--gold) 40%, transparent);
+  }
+  .btn-gold-glass:active {
+    transform: translateY(0px);
   }
 }
