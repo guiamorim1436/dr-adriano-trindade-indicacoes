@@ -11,7 +11,7 @@ export function Logo({ to = "/" }: { to?: string }) {
   });
 
   const nome = data?.nome_plataforma || "Clínica Vasques";
-  const logoUrl = data?.logo_url || logoAsset.url;
+  const logoUrl = data?.logo_url || logoDefault;
 
   return (
     <Link to={to} className="inline-flex items-center gap-2">
