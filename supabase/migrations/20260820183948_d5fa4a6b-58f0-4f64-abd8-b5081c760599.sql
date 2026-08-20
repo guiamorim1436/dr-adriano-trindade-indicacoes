@@ -1,0 +1,1 @@
+UPDATE public.configuracoes_kommo SET logo_url = 'https://drvictorvasques.com.br/wp-content/uploads/2023/01/logotipo.png' WHERE id = 1;
