@@ -1,0 +1,1 @@
+UPDATE public.configuracoes_kommo SET logo_url = 'https://ibb.co/WppJ88S0' WHERE id = 1;
