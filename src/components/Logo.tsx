@@ -14,13 +14,10 @@ export function Logo({ to = "/" }: { to?: string }) {
   const logoUrl = data?.logo_url || logoDefault;
 
   return (
-    <Link to={to} className="inline-flex items-center gap-2">
-      <div className="h-9 w-9 rounded-full overflow-hidden flex items-center justify-center bg-background shrink-0 ring-1 ring-[hsl(var(--gold))]/40">
-        <img src={logoUrl} alt={nome} className="h-full w-full object-contain" />
+    <Link to={to} className="inline-flex items-center">
+      <div className="h-12 w-48 flex items-center justify-start shrink-0">
+        <img src={logoUrl} alt={nome} className="h-full w-full object-contain object-left" />
       </div>
-      <span className="font-serif text-xl text-primary truncate max-w-[200px] sm:max-w-none">
-        {nome}
-      </span>
     </Link>
   );
 }
