@@ -1,0 +1,55 @@
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Settings } from "lucide-react";
+import { PageShell } from "@/components/PageShell";
+import { Button } from "@/components/ui/button";
+import { getPublicConfig } from "@/lib/api";
+
+export default function Index() {
+  const { data } = useQuery({ queryKey: ["public-config"], queryFn: getPublicConfig });
+  const nome = data?.nome_plataforma || "SER Cirurgia Plástica";
+
+  useEffect(() => {
+    document.title = `${nome} · programa de indicação`;
+  }, [nome]);
+
+  return (
+    <PageShell>
+      <section className="space-y-6 text-center">
+        <h1 className="text-4xl md:text-5xl text-primary">
+          Cuidar de quem você ama, <em className="italic">começa por uma indicação</em>.
+        </h1>
+        <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
+          Indique amigos e familiares para nossa clínica em poucos segundos. Sem cadastro complicado,
+          sem senha.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+          <Button asChild size="lg"><Link to="/indicar">Quero indicar</Link></Button>
+          <Button asChild size="lg" variant="ghost"><Link to="/entrar">Já indico — acessar painel</Link></Button>
+        </div>
+      </section>
+
+      <section className="mt-16 grid gap-4 sm:grid-cols-3">
+        {[
+          { t: "Simples", d: "Preencha nome e WhatsApp." },
+          { t: "Pessoal", d: "Você recebe um link só seu." },
+          { t: "Acolhedor", d: "Acompanhe quem você indicou." },
+        ].map((c) => (
+          <div key={c.t} className="rounded-2xl border border-border/60 bg-card p-5">
+            <h3 className="text-xl text-primary">{c.t}</h3>
+            <p className="text-sm text-muted-foreground mt-1">{c.d}</p>
+          </div>
+        ))}
+      </section>
+
+      <footer className="mt-20 pt-8 border-t border-border/40 text-center pb-8">
+        <Button asChild variant="ghost" size="sm" className="text-muted-foreground/50 hover:text-primary transition-colors">
+          <Link to="/login" className="flex items-center gap-2">
+            <Settings className="w-4 h-4" /> Administração
+          </Link>
+        </Button>
+      </footer>
+    </PageShell>
+  );
+}
