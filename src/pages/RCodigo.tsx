@@ -59,9 +59,10 @@ export default function RCodigo() {
 
   return (
     <PageShell max="sm">
-      <h1 className="text-3xl text-primary">
-        {indicador.nome.split(" ")[0]} indicou nossa clínica para você ❤️
+      <h1 className="text-3xl text-primary italic">
+        {indicador.nome.split(" ")[0]} recomendou a Clínica Vasques para você
       </h1>
+
       <p className="text-muted-foreground mt-3">
         Deixe seus dados e nossa equipe entrará em contato com todo o cuidado.
       </p>

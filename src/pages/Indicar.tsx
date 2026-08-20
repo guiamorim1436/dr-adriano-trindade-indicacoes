@@ -30,7 +30,7 @@ export default function Indicar() {
 
   return (
     <PageShell max="sm">
-      <h1 className="text-3xl text-primary mb-2">Vamos começar</h1>
+      <h1 className="text-3xl text-primary mb-2 italic">Seja um Embaixador</h1>
       <p className="text-muted-foreground mb-8">
         Preencha seus dados para gerar seu link pessoal de indicação.
       </p>
