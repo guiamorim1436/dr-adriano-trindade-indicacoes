@@ -8,7 +8,7 @@ import { getPublicConfig } from "@/lib/api";
 
 export default function Index() {
   const { data } = useQuery({ queryKey: ["public-config"], queryFn: getPublicConfig });
-  const nome = data?.nome_plataforma || "SER Cirurgia Plástica";
+  const nome = data?.nome_plataforma || "Clínica Vasques";
 
   useEffect(() => {
     document.title = `${nome} · programa de indicação`;
@@ -18,11 +18,11 @@ export default function Index() {
     <PageShell>
       <section className="space-y-6 text-center">
         <h1 className="text-4xl md:text-5xl text-primary">
-          Cuidar de quem você ama, <em className="italic">começa por uma indicação</em>.
+          Beleza e cuidado, <em className="italic text-gold">agora compartilhados</em>.
         </h1>
         <p className="text-muted-foreground text-base md:text-lg max-w-md mx-auto">
-          Indique amigos e familiares para nossa clínica em poucos segundos. Sem cadastro complicado,
-          sem senha.
+          Indique a Clínica Vasques para seus amigos e familiares. Nosso programa de indicação recompensa você por compartilhar confiança.
+
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
           <Button asChild size="lg"><Link to="/indicar">Quero indicar</Link></Button>

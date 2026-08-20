@@ -10,7 +10,7 @@ export function Logo({ to = "/" }: { to?: string }) {
     staleTime: 1000 * 60 * 5,
   });
 
-  const nome = data?.nome_plataforma || "Clinica SER";
+  const nome = data?.nome_plataforma || "Clínica Vasques";
   const logoUrl = data?.logo_url || logoAsset.url;
 
   return (

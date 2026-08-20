@@ -6,9 +6,9 @@ export default function RCodigoObrigado() {
   return (
     <PageShell max="sm">
       <div className="text-center space-y-4 py-8">
-        <h1 className="text-3xl text-primary">Obrigado ❤️</h1>
+        <h1 className="text-3xl text-primary italic">Agradecemos o interesse</h1>
         <p className="text-muted-foreground">
-          Recebemos seus dados. Em breve nossa equipe entrará em contato pelo WhatsApp.
+          Recebemos seus dados. Em breve nossa equipe entrará em contato para agendar sua consulta.
         </p>
         <div className="pt-4">
           <Button asChild variant="ghost"><Link to="/">Voltar ao início</Link></Button>

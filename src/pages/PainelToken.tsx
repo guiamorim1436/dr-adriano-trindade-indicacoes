@@ -37,7 +37,7 @@ export default function PainelToken() {
         <h1 className="text-3xl text-primary">{data.indicador.nome}</h1>
         {total > 0 && (
           <p className="text-muted-foreground">
-            Você já indicou {total} {total === 1 ? "pessoa" : "pessoas"} ❤️
+            Você já indicou {total} {total === 1 ? "pessoa" : "pessoas"} para nós
           </p>
         )}
       </section>
