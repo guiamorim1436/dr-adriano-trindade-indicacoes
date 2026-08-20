@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPublicConfig } from "@/lib/api";
-import logoAsset from "@/assets/logo-clinica-ser.jpg.asset.json";
+const logoDefault = "https://drvictorvasques.com.br/wp-content/uploads/2023/01/logotipo.png";
 
 export function Logo({ to = "/" }: { to?: string }) {
   const { data } = useQuery({
