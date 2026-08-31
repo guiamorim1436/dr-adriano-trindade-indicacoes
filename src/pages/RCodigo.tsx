@@ -60,7 +60,7 @@ export default function RCodigo() {
   return (
     <PageShell max="sm">
       <h1 className="text-3xl text-primary italic">
-        {indicador.nome.split(" ")[0]} recomendou o Dr. Waldemar Penna para você
+        {indicador.nome.split(" ")[0]} recomendou a Clínica Vasques para você
       </h1>
 
       <p className="text-muted-foreground mt-3">
