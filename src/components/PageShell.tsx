@@ -12,7 +12,7 @@ export function PageShell({ children, max = "md" }: { children: ReactNode; max?:
       </header>
       <main className={`mx-auto ${maxClass} px-5 py-10`}>{children}</main>
       <footer className={`mx-auto ${maxClass} px-5 py-8 text-center text-xs text-muted-foreground`}>
-        Programa de indicação · Clínica Vasques
+        Programa de indicação · Dr. Waldemar Penna
       </footer>
     </div>
   );
