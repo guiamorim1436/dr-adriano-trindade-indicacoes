@@ -219,10 +219,14 @@ async function handle(action: string, payload: any, admin: any) {
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
-    const { action, payload } = await req.json();
+    const { action, payload, schema } = await req.json();
+    const dbSchema = schema && schema !== "public" ? schema : undefined;
+    const clientOpts: any = {};
+    if (dbSchema) clientOpts.db = { schema: dbSchema };
     const admin = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      clientOpts,
     );
     const result = await handle(action, payload ?? {}, admin);
     return new Response(JSON.stringify(result), {

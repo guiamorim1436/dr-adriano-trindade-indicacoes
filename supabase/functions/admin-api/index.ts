@@ -182,6 +182,9 @@ Deno.serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("Sem autenticação.");
 
+    // Read body once (stream can only be consumed once)
+    const { action, payload, schema } = await req.json();
+
     // Verify the user with the publishable key + auth header
     const userClient = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -191,15 +194,24 @@ Deno.serve(async (req) => {
     const { data: { user }, error: userErr } = await userClient.auth.getUser();
     if (userErr || !user) throw new Error("Sessão inválida.");
 
-    // Admin client for queries (bypass RLS) — but check role first
-    const admin = createClient(
+    // Admin client on public schema for auth check (has_role lives in public)
+    const adminPublic = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
-    const { data: isAdmin } = await admin.rpc("has_role", { _user_id: user.id, _role: "admin" });
+    const { data: isAdmin } = await adminPublic.rpc("has_role", { _user_id: user.id, _role: "admin" });
     if (!isAdmin) throw new Error("Sem permissão.");
 
-    const { action, payload } = await req.json();
+    // Data client — uses tenant schema if provided
+    const dbSchema = schema && schema !== "public" ? schema : undefined;
+    const clientOpts: any = {};
+    if (dbSchema) clientOpts.db = { schema: dbSchema };
+    const admin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      clientOpts,
+    );
+
     const result = await handle(action, payload ?? {}, admin);
     return new Response(JSON.stringify(result), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

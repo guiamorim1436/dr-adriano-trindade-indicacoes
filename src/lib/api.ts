@@ -1,8 +1,10 @@
 import { supabase } from "@/integrations/supabase/client";
 
+const SCHEMA = import.meta.env.VITE_SUPABASE_SCHEMA || undefined;
+
 async function callPublic<T = any>(action: string, payload: any = {}): Promise<T> {
   const { data, error } = await supabase.functions.invoke("public-api", {
-    body: { action, payload },
+    body: { action, payload, schema: SCHEMA },
   });
   if (error) {
     // Try to extract structured error message from edge function response
@@ -22,7 +24,7 @@ async function callPublic<T = any>(action: string, payload: any = {}): Promise<T
 
 async function callAdmin<T = any>(action: string, payload: any = {}): Promise<T> {
   const { data, error } = await supabase.functions.invoke("admin-api", {
-    body: { action, payload },
+    body: { action, payload, schema: SCHEMA },
   });
   if (error) {
     const ctx: any = (error as any).context;
