@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Button } from "@/components/ui/button";
-import { getPainel } from "@/lib/api";
+import { getPainel, getPublicConfig } from "@/lib/api";
 
 export default function PainelToken() {
   const { token = "" } = useParams();
@@ -13,6 +13,12 @@ export default function PainelToken() {
     queryKey: ["painel", token],
     queryFn: () => getPainel({ token }),
   });
+  const { data: config } = useQuery({ queryKey: ["public-config"], queryFn: getPublicConfig });
+  const nomePlataforma = config?.nome_plataforma || "Clínica Vasques";
+
+  useEffect(() => {
+    document.title = `${nomePlataforma} · programa de indicação`;
+  }, [nomePlataforma]);
 
   if (isLoading) {
     return <PageShell><p className="text-muted-foreground">Carregando...</p></PageShell>;
