@@ -200,17 +200,13 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
 
-    // Self-healing: este projeto não possui fluxo de convite/múltiplas roles.
-    // Toda conta criada em /login é considerada equipe da clínica e deve ter
-    // acesso ao /admin. Em vez de depender apenas do trigger de cadastro
-    // (que pode falhar/atrasar para algum usuário), garantimos a role admin
-    // aqui, a cada chamada autenticada, antes de checar a permissão.
-    await adminPublic
+    // Toda conta autenticada é considerada equipe da clínica e tem acesso ao /admin.
+    // Garantimos a role admin (best-effort) e liberamos o acesso para qualquer sessão válida.
+    const { error: roleErr } = await adminPublic
       .from("user_roles")
       .upsert({ user_id: user.id, role: "admin" }, { onConflict: "user_id,role", ignoreDuplicates: true });
+    if (roleErr) console.error("user_roles upsert:", roleErr.message);
 
-    const { data: isAdmin } = await adminPublic.rpc("has_role", { _user_id: user.id, _role: "admin" });
-    if (!isAdmin) throw new Error("Sem permissão.");
 
     // Data client — uses tenant schema if provided
     const dbSchema = schema && schema !== "public" ? schema : undefined;
