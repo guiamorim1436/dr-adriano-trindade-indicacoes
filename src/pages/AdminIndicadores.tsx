@@ -19,7 +19,7 @@ import { Gift } from "lucide-react";
 
 export default function AdminIndicadores() {
   const queryClient = useQueryClient();
-  const { data } = useQuery({ queryKey: ["indicadores"], queryFn: listarIndicadores });
+  const { data, error } = useQuery({ queryKey: ["indicadores"], queryFn: listarIndicadores });
   const origin = typeof window !== "undefined" ? window.location.origin : "";
 
   const mutation = useMutation({
@@ -50,6 +50,11 @@ export default function AdminIndicadores() {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl text-primary font-bold">Indicadores</h1>
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <strong>Erro ao carregar:</strong> {(error as Error).message}
+        </div>
+      )}
       
       <div className="rounded-2xl border border-border/60 bg-card overflow-x-auto shadow-sm">
         <table className="w-full text-sm">

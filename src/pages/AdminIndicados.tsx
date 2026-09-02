@@ -10,7 +10,7 @@ const STATUSES = ["recebido", "em_contato", "compareceu", "convertido", "encerra
 
 export default function AdminIndicados() {
   const qc = useQueryClient();
-  const { data } = useQuery({ queryKey: ["indicacoes"], queryFn: listarIndicacoes });
+  const { data, error } = useQuery({ queryKey: ["indicacoes"], queryFn: listarIndicacoes });
   const { data: config } = useQuery({ queryKey: ["config"], queryFn: getConfigKommo });
 
   const [syncing, setSyncing] = useState(false);
@@ -40,6 +40,11 @@ export default function AdminIndicados() {
 
   return (
     <div className="space-y-6">
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <strong>Erro ao carregar:</strong> {(error as Error).message}
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl text-primary">Indicados</h1>
         <Button variant="outline" size="sm" onClick={sync} disabled={syncing} className="gap-2">
