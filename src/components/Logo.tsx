@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPublicConfig } from "@/lib/api";
-const logoDefault = "https://drvictorvasques.com.br/wp-content/uploads/2023/01/logotipo.png";
+import logoLocal from "@/assets/logo-clinica-vasques.png";
 
 export function Logo({ to = "/" }: { to?: string }) {
   const { data } = useQuery({
@@ -11,7 +11,7 @@ export function Logo({ to = "/" }: { to?: string }) {
   });
 
   const nome = data?.nome_plataforma || "Clínica Vasques";
-  const logoUrl = data?.logo_url || logoDefault;
+  const logoUrl = data?.logo_url || logoLocal;
 
   return (
     <Link to={to} className="inline-flex items-center">
