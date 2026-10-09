@@ -15,7 +15,7 @@ export function Logo({ to = "/" }: { to?: string }) {
 
   return (
     <Link to={to} className="inline-flex items-center">
-      <div className="h-12 w-48 flex items-center justify-start shrink-0">
+      <div className="h-24 w-80 max-w-[85vw] flex items-center justify-start shrink-0">
         <img src={logoUrl} alt={nome} className="h-full w-full object-contain object-left" />
       </div>
     </Link>
