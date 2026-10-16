@@ -1,4 +1,4 @@
-# Clínica Vasques — Sistema de Indicações
+# Sistema de Indicações Tenno
 
 Documentação completa: banco de dados, arquitetura e estrutura do app.
 
@@ -6,7 +6,7 @@ Documentação completa: banco de dados, arquitetura e estrutura do app.
 
 ## 1. Visão geral
 
-App web (React 18 + Vite + TypeScript + Tailwind + shadcn/ui) com backend Lovable Cloud (Supabase).
+App web (React 18 + Vite + TypeScript + Tailwind + shadcn/ui) com backend Supabase.
 
 Três públicos:
 
